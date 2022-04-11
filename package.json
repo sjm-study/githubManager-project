@@ -26,7 +26,6 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-standalone": "^6.26.0",
-    "color": "^4.2.3",
     "cross-env": "^6.0.3",
     "css-loader": "^3.2.1",
     "eslint": "^6.7.1",
