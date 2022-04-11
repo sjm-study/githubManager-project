@@ -49,8 +49,8 @@ jobs:
 
         - name: Install Modules
           if: steps.cache-node-modules.outputs.cache-hit != 'true'
-            run: npm install
-            
+          run: npm install
+
         - run: npm run build
         # - run: npm run deploy
         - name: Deploy
