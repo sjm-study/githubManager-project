@@ -21,7 +21,7 @@ function Index() {
 
   return (
     <div>
-      <p className={styles.title}>Instructions1299</p>
+      <p className={styles.title}>Instructions129</p>
       <Row style={{ display: "flex", justifyContent: "space-around" }}>
         <Col className={styles.small} md={8} sm={12} xs={12}>
           <span style={{ display: "block", fontSize: 18 }}>

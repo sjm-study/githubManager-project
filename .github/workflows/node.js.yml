@@ -43,12 +43,14 @@ jobs:
           with:
             # npm cache files are stored in `~/.npm` on Linux/macOS
             path: ~/.cache
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-build-${{ env.cache-name }}-
-              ${{ runner.os }}-build-
-              ${{ runner.os }}-
-        - run: npm install
+            key: ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-${{ hashFiles('package-lock.json') }}-${{ hashFiles('package.json') }}
+            restore-keys: | 
+              ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-
+
+        - name: Install Modules
+          if: steps.cache-node-modules.outputs.cache-hit != 'true'
+            run: npm install
+            
         - run: npm run build
         # - run: npm run deploy
         - name: Deploy
