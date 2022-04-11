@@ -26,6 +26,23 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        
+    # cache 
+    - name: Cache node modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      env:
+          cache-name: cache-node-modules
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: node_modules
+        key: ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-${{ hashFiles('package-lock.json') }}-${{ hashFiles('package.json') }}
+        restore-keys: | 
+          ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-
+
+    - name: Install Modules
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: npm install
 
     - run: npm ci
     - run: npm run build --if-present
@@ -36,23 +53,6 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
-        
-        # cache 
-        - name: Cache node modules
-          id: cache-node-modules
-          uses: actions/cache@v3
-          env:
-              cache-name: cache-node-modules
-          with:
-            # npm cache files are stored in `~/.npm` on Linux/macOS
-            path: node_modules
-            key: ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-${{ hashFiles('package-lock.json') }}-${{ hashFiles('package.json') }}
-            restore-keys: | 
-              ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-
-
-        - name: Install Modules
-          if: steps.cache-node-modules.outputs.cache-hit != 'true'
-          run: npm install
 
         - run: npm run build
         # - run: npm run deploy
