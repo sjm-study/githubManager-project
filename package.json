@@ -62,17 +62,5 @@
     "react-hot-loader": "^4.12.18",
     "url-loader": "^3.0.0",
     "webpack-cli": "^3.3.10"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,less}": [
-      "prettier --write",
-      "git add"
-    ],
-    "**/*.{js,jsx}": "eslint --ext .js"
   }
 }
