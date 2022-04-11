@@ -42,7 +42,7 @@ jobs:
               cache-name: cache-node-modules
           with:
             # npm cache files are stored in `~/.npm` on Linux/macOS
-            path: ~/.cache
+            path: node_modules
             key: ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-${{ hashFiles('package-lock.json') }}-${{ hashFiles('package.json') }}
             restore-keys: | 
               ${{ runner.os }}-${{ matrix.node-version }}-nodeModules-
